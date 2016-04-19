@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var path = require('path')
+var exec = require('./../util/exec')
+var program = require('commander')
+var logger = require('./../util/logger')
+
+program.option('--china', '切换到 taobao 镜像')
+  .option('--registry [registry url]', '指定镜像')
+  .parse(process.argv)
+
+console.log()
+process.on('exit', function () {
+  console.log()
+})
+
+if (!program.args[0]) {
+  logger.fatal('请指定 dependency 名称.')
+}
+
+var module = 'cooking-' + program.args[0]
+
+exec('npm', ['update', module, '--prefix', path.join(__dirname, '..')], {
+  stdio: 'inherit'
+})

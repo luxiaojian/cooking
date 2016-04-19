@@ -1,35 +1,16 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var watch = require('./cooking-watch');
-var build = require('./cooking-build');
-var linkModule =require('./../src/utils').linkModule;
+var program = require('commander')
+var watch = require('./cooking-watch')
+var build = require('./cooking-build')
 
-program.version(require('./../package.json').version);
-
-program.command('init [name]')
-  .alias('i')
-  .description('init project use vue, react or angular. Default vue.')
-  .action(require('./cooking-init'));
-
-program.command('watch')
-  .alias('w')
-  .description('watch mode')
-  .option('-c, --config [file]', 'Use this if you want to specify something different than cooking.conf.js, which is the default.')
-  .action(function (options) {
-    linkModule(watch, options);
-  });
-
-program.command('build')
-  .alias('b')
-  .description('build mode')
-  .option('-c, --config [file]', 'Use this if you want to specify something different than cooking.conf.js, which is the default.')
-  .action(function (options) {
-    linkModule(build, options);
-  });
-
-program.parse(process.argv);
+program.version(require('./../package.json').version)
+  .command('init [template]', '初始化一个空项目，默认是 vue')
+  .command('update <dependency>', '更新 cooking 的 dependency, npm update 用法一致')
+  .command('watch', '开发模式')
+  .command('build', '构建模式')
+  .parse(process.argv)
 
 if (!process.argv.slice(2).length) {
-  program.outputHelp();
+  program.outputHelp()
 }
