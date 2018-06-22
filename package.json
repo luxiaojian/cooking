@@ -6,7 +6,10 @@
   "bin": {
     "cooking": "bin/cooking"
   },
-  "scripts": {},
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ElemeFE/cooking.git"
@@ -74,6 +77,8 @@
     "vue-style-loader": "1.0.0",
     "webpack": "1.12.14",
     "webpack-dev-server": "1.14.1",
-    "webpack-merge": "0.8.4"
-  }
+    "webpack-merge": "0.8.4",
+    "snyk": "^1.83.0"
+  },
+  "snyk": true
 }
